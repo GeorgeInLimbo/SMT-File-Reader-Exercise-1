@@ -25,6 +25,7 @@ import java.io.IOException;
 public class FileOne {
 
 	private String file;
+	private String textFromFile;
 
 	/**
 	 * Constructor that accepts a file name as an argument
@@ -37,30 +38,22 @@ public class FileOne {
 
 	/**
 	 * This method uses BufferedWriter to create a text file, and populates that
-	 * file with a Yogi Berra quote
+	 * file with text from the file
 	 */
-	public void writeToFile() {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			writer.write("When you see a fork in the road, take it.");
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void writeToFile(String fileText) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(getFile()));
+		writer.write(fileText);
+		writer.close();
 	}
 
 	/**
 	 * This method uses BufferedReader to take text from a file and display it to
 	 * the console
 	 */
-	public void fileReader() {
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			System.out.println(reader.readLine());
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void fileReader() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(getFile()));
+		setTextFromFile(reader.readLine());
+		reader.close();
 	}
 
 	/**
@@ -70,5 +63,23 @@ public class FileOne {
 	 */
 	public String getFile() {
 		return file;
+	}
+
+	/**
+	 * Sets the value for the textFromFile variable
+	 * 
+	 * @param the value for textFromFile to set
+	 */
+	public void setTextFromFile(String textFromFile) {
+		this.textFromFile = textFromFile;
+	}
+
+	/**
+	 * Gets the value in the textFromFile variable
+	 * 
+	 * @return the textFromFile value
+	 */
+	public String getTextFromFile() {
+		return textFromFile;
 	}
 }
